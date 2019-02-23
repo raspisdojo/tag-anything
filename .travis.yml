@@ -1,0 +1,47 @@
+sudo: true
+os: linux
+cache: false
+language: ruby
+env:
+- URL=https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
+branches:
+  only:
+    - master
+    - QA
+    - /^feature.*$/
+before_install:
+  - openssl aes-256-cbc -K $encrypted_63032c925c2f_key -iv $encrypted_63032c925c2f_iv
+    -in assets/server.key.enc -out assets/server.key -d
+  - export SFDX_AUTOUPDATE_DISABLE=false
+  - export SFDX_USE_GENERIC_UNIX_KEYCHAIN=true
+  - export SFDX_DOMAIN_RETRY=300
+  - export SFDX_DISABLE_APP_HUB=true
+  - export SFDX_LOG_LEVEL=DEBUG
+  - mkdir sfdx
+  - wget -qO- $URL | tar xJ -C sfdx --strip-components 1
+  - "./sfdx/install"
+  - export PATH=./sfdx/$(pwd):$PATH
+  - sfdx --version
+  - sfdx plugins --core
+jobs:
+  include:
+    - stage: test
+      if: NOT (branch IN (master, QA))
+      script: 
+      - bash assets/runTestAndDeploys.sh -e $TEST_CONSUMERKEY -u $TEST_USER -o TestOnly
+    - stage: "Test PR in QA"
+      if: (branch = QA) AND (type = pull_request)
+      script:
+      - bash assets/runTestAndDeploys.sh -e $QA_CONSUMERKEY -u $QA_USER -o TestOnly
+    - stage: "Test PR in Production"
+      if: (branch = master) AND (type = pull_request)
+      script:
+      - bash assets/runTestAndDeploys.sh -e $CONSUMERKEY -u $PRODUCTION_USER -o TestOnly
+    - stage: "Test in QA"
+      if: (branch = QA) AND (type = push)
+      script:
+      - bash assets/runTestAndDeploys.sh -e $QA_CONSUMERKEY -u $QA_USER -o TestOnly
+    - stage: "Test in Production"
+      if: (branch = master) AND (type = push)
+      script:
+      - bash assets/runTestAndDeploys.sh -e $CONSUMERKEY -u $PRODUCTION_USER -o TestOnly
