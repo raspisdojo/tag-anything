@@ -9,6 +9,7 @@ do
 done
 echo "Connecting to Environment"
 sfdx force:auth:jwt:grant --clientid $ENVIRONMENT --jwtkeyfile assets/server.key --username $USER --setdefaultdevhubusername -a DevHub
+mkdir temp_metadata
 sfdx force:source:convert -d temp_metadata/ -n Travis_CI_Package
 if [ "$OPERATION" = "TestOnly" ]; then
     echo "Running Validation against" $ENVIRONMENT
