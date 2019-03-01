@@ -1,0 +1,14 @@
+.DS_Store
+.sfdx
+.project
+.salesforce
+.settings
+node_modules
+.idea
+.classpath
+.vscode
+.tern-project
+# Ignoring Profiles
+*.profile-meta.xml
+# Ignore Org Preferences Settings
+OrgPreference.settings-meta.xml
