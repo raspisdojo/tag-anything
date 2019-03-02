@@ -1,5 +1,5 @@
 @isTest
-public with sharing class TagAnythingBrowserController_Test {
+public with sharing class TagAnythingBrowserControllerTest {
 
     @TestSetup
     static void makeData(){
@@ -15,7 +15,7 @@ public with sharing class TagAnythingBrowserController_Test {
             Internal_Value__c = 'Bug',
             Tag_Color__c = '#FF0000'
         );
-        tags_insert.add(new_tag);
+        tags_insert.add(bug_tag);
 
         insert tags_insert;
     }
