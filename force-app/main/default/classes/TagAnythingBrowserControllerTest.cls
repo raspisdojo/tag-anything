@@ -21,10 +21,14 @@ public with sharing class TagAnythingBrowserControllerTest {
     }
 
     @isTest
-    public static void requireTags() {
+    public static void requireNewTag() {
         List<Tag_Anything__c> new_test = TagAnythingBrowserController.requireTags('New');
         System.assertEquals('New', new_test[0].Internal_Value__c);
-        List<Tag_Anything__c> bug_test = TagAnythingBrowserController.requireTags('New');
+    }
+
+    @isTest
+    public static void requireBugTag(){
+        List<Tag_Anything__c> bug_test = TagAnythingBrowserController.requireTags('Bug');
         System.assertEquals('#FF0000', bug_test[0].Tag_Color__c);
     }
 }
