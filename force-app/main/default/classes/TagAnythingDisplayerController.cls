@@ -7,9 +7,9 @@ public without sharing class TagAnythingDisplayerController {
             current_tags = current_tags.deleteWhitespace();
             List<String> current_tags_to_check = current_tags.split(',');
             tags_to_return = [SELECT Id, Name, Icon__c, Internal_Value__c, Label_Color__c, Tag_Color__c
-                            FROM Tag_Anything__c
-                            WHERE Internal_Value__c IN :current_tags_to_check
-                            ORDER BY Name DESC];
+                                FROM Tag_Anything__c
+                                WHERE Internal_Value__c IN :current_tags_to_check
+                                ORDER BY Name DESC];
         }
         return tags_to_return;
     }
