@@ -1,6 +1,6 @@
 public without sharing class TagAnythingDisplayerController {
 
-    @AuraEnabled
+    @AuraEnabled(cacheable=true)
     public static List<Tag_Anything__c> requireCurrentTags(String current_tags) {
         List<Tag_Anything__c> tags_to_return = new List<Tag_Anything__c>();
         if (String.isNotBlank(current_tags)) {
