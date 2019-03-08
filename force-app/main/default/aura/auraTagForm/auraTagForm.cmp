@@ -1,0 +1,4 @@
+
+<aura:component implements="lightning:actionOverride" access="global">
+    <c:tagForm />
+</aura:component>
