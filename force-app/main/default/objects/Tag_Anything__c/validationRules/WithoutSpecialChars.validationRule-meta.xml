@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>WithoutSpecialChars</fullName>
+    <active>true</active>
+    <errorConditionFormula>NOT(REGEX(Internal_Value__c, &#39;^[A-Za-z0-9]{1,6}$&#39;))</errorConditionFormula>
+    <errorDisplayField>Internal_Value__c</errorDisplayField>
+    <errorMessage>The Internal Value field can only contain alphanumeric characters.</errorMessage>
+</ValidationRule>
