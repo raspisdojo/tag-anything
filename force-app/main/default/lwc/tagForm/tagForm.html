@@ -1,5 +1,8 @@
 <template>
-    <lightning-record-edit-form record-id={recordId} object-api-name="Tag_Anything__c">
+    <lightning-record-edit-form 
+        record-id={recordId} 
+        object-api-name={tagObject}
+        onsuccess={handleSuccess}>
         <lightning-card icon-name="custom:custom7" title="Tag" >
             <lightning-messages>
             </lightning-messages>
