@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ListView xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>Internal_Value__c</columns>
+    <columns>Tag_Color__c</columns>
+    <columns>Label_Color__c</columns>
+    <columns>Icon__c</columns>
+    <columns>Is_Active__c</columns>
     <filterScope>Everything</filterScope>
-    <label>Todos</label>
+    <label>All</label>
 </ListView>
