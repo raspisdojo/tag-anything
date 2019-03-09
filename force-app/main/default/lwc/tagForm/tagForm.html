@@ -1,5 +1,32 @@
 <template>
-    <lightning-card icon-name="custom:custom7" title="Tag" >
-         <div>TODO: Form goes here!</div>
-    </lightning-card>
+    <lightning-record-edit-form record-id={recordId} object-api-name="Tag_Anything__c">
+        <lightning-card icon-name="custom:custom7" title="Tag" >
+            <lightning-messages>
+            </lightning-messages>
+            <lightning-layout multiple-rows="true" horizontal-align="center" vertical-align="start" >
+                <lightning-layout-item size="6" padding="around-small" >
+                    <lightning-input-field field-name="Name"></lightning-input-field>
+                </lightning-layout-item>
+                <lightning-layout-item size="6" padding="around-small" >
+                    <lightning-input-field field-name="Is_Active__c"></lightning-input-field>
+                </lightning-layout-item>
+                <lightning-layout-item size="6" padding="around-small" >
+                    <lightning-input-field field-name="Internal_Value__c"></lightning-input-field>
+                </lightning-layout-item>
+                <lightning-layout-item size="6" padding="around-small" >
+                    <lightning-input-field field-name="Icon__c"></lightning-input-field>
+                </lightning-layout-item>
+                <lightning-layout-item size="6" padding="around-small" >
+                    <lightning-input-field field-name="Label_Color__c"></lightning-input-field>
+                </lightning-layout-item>
+                <lightning-layout-item size="6" padding="around-small" >
+                    <lightning-input-field field-name="Tag_Color__c"></lightning-input-field>
+                </lightning-layout-item>
+            </lightning-layout>
+            <div slot="footer">
+                <lightning-button label="Cancel" class="slds-p-horizontal_xx-small"></lightning-button>
+                <lightning-button type="submit" label="Submit" variant="brand" class="slds-p-horizontal_xx-small"></lightning-button>
+            </div>
+        </lightning-card>
+    </lightning-record-edit-form>
 </template>
