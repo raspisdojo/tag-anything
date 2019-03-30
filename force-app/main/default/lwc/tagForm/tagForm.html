@@ -1,29 +1,28 @@
 <template>
-    <lightning-record-edit-form 
-        record-id={recordId} 
-        object-api-name={tagObject}
-        onsuccess={handleSuccess}>
+    <lightning-record-edit-form
+        record-id={recordId}
+        object-api-name={objectApiName}
+        onsuccess={handleSuccess} >
         <lightning-card icon-name="custom:custom7" title="Tag" >
-            <lightning-messages>
-            </lightning-messages>
+            <lightning-messages></lightning-messages>
             <lightning-layout multiple-rows="true" horizontal-align="center" vertical-align="start" >
                 <lightning-layout-item size="6" padding="around-small" >
-                    <lightning-input-field field-name="Name"></lightning-input-field>
+                    <lightning-input-field field-name={nameField}></lightning-input-field>
                 </lightning-layout-item>
                 <lightning-layout-item size="6" padding="around-small" >
-                    <lightning-input-field field-name="Is_Active__c"></lightning-input-field>
+                    <lightning-input-field field-name={isActiveField}></lightning-input-field>
                 </lightning-layout-item>
                 <lightning-layout-item size="6" padding="around-small" >
-                    <lightning-input-field field-name="Internal_Value__c"></lightning-input-field>
+                    <lightning-input-field field-name={internalValueField}></lightning-input-field>
                 </lightning-layout-item>
                 <lightning-layout-item size="6" padding="around-small" >
-                    <lightning-input-field field-name="Icon__c"></lightning-input-field>
+                    <lightning-input-field field-name={iconField}></lightning-input-field>
                 </lightning-layout-item>
                 <lightning-layout-item size="6" padding="around-small" >
-                    <lightning-input-field field-name="Label_Color__c"></lightning-input-field>
+                    <lightning-input-field field-name={labelColorField}></lightning-input-field>
                 </lightning-layout-item>
                 <lightning-layout-item size="6" padding="around-small" >
-                    <lightning-input-field field-name="Tag_Color__c"></lightning-input-field>
+                    <lightning-input-field field-name={tagColorField}></lightning-input-field>
                 </lightning-layout-item>
             </lightning-layout>
             <div slot="footer">
