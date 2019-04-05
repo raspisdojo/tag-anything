@@ -12,6 +12,7 @@ sfdx force:auth:jwt:grant --clientid $ENVIRONMENT --jwtkeyfile assets/server.key
 mkdir temp_metadata
 sfdx force:source:convert -d temp_metadata/ -n Travis_CI_Package
 TEST_CLASSES=$(cd force-app/main/default/classes/ && ls -m *Test*.cls | tr -d ' ' | tr -d '.cls');
+echo "TEST CLASSES: " $TEST_CLASSES
 if [ "$OPERATION" = "TestOnly" ]; then
     echo "Running Validation against" $ENVIRONMENT
     sfdx force:mdapi:deploy -c -l RunSpecifiedTests -r $TEST_CLASSES -d temp_metadata/ -u DevHub -w 10
