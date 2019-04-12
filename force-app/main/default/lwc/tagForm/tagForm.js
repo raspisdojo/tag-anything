@@ -30,4 +30,9 @@ export default class TagForm extends NavigationMixin(LightningElement) {
             }
         });
     }
+
+    handleCancel() {
+        window.history.back();
+        return false;
+    }
 }
