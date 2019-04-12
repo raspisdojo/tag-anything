@@ -1,0 +1,4 @@
+
+<aura:component implements="lightning:actionOverride,force:hasRecordId" access="global">
+    <c:tagForm recordId="{!v.recordId}" />
+</aura:component>

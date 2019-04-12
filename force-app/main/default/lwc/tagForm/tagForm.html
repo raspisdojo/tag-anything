@@ -1,0 +1,34 @@
+<template>
+    <lightning-record-edit-form
+        record-id={recordId}
+        object-api-name={objectApiName}
+        onsuccess={handleSuccess} >
+        <lightning-card icon-name="custom:custom7" title="Tag" >
+            <lightning-messages></lightning-messages>
+            <lightning-layout multiple-rows="true" horizontal-align="center" vertical-align="start" >
+                <lightning-layout-item size="6" padding="around-small" >
+                    <lightning-input-field field-name={nameField}></lightning-input-field>
+                </lightning-layout-item>
+                <lightning-layout-item size="6" padding="around-small" >
+                    <lightning-input-field field-name={isActiveField}></lightning-input-field>
+                </lightning-layout-item>
+                <lightning-layout-item size="6" padding="around-small" >
+                    <lightning-input-field field-name={internalValueField}></lightning-input-field>
+                </lightning-layout-item>
+                <lightning-layout-item size="6" padding="around-small" >
+                    <lightning-input-field field-name={iconField}></lightning-input-field>
+                </lightning-layout-item>
+                <lightning-layout-item size="6" padding="around-small" >
+                    <lightning-input-field field-name={labelColorField}></lightning-input-field>
+                </lightning-layout-item>
+                <lightning-layout-item size="6" padding="around-small" >
+                    <lightning-input-field field-name={tagColorField}></lightning-input-field>
+                </lightning-layout-item>
+            </lightning-layout>
+            <div slot="footer">
+                <lightning-button label="Cancel" onclick={handleCancel} class="slds-p-horizontal_xx-small"></lightning-button>
+                <lightning-button type="submit" label="Submit" variant="brand" class="slds-p-horizontal_xx-small"></lightning-button>
+            </div>
+        </lightning-card>
+    </lightning-record-edit-form>
+</template>
