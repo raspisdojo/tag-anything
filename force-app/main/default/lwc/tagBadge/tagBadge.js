@@ -34,4 +34,8 @@ export default class TagBadge extends LightningElement {
     get tagColor() {
         return 'background-color: ' + getFieldValue(this.wiredRecord.data, TAG_COLOR_FIELD);
     }
+
+    handleBadgeClick() {
+        this.dispatchEvent(new CustomEvent('selected', { detail: this.wiredRecord.data }));
+    }
 }
