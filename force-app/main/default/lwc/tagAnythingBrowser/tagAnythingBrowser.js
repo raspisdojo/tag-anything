@@ -33,23 +33,23 @@ export default class TagAnythingBrowser extends LightningElement {
     }
 
     handleKeyUp(evt) {
-        let queryTerm = evt.target.value;
-        if (this.isNullOrWhiteSpace(queryTerm)) {
+        let query_term = evt.target.value;
+        if (this.isNullOrWhiteSpace(query_term)) {
             this.tagsToDisplay = [];
         }
         else {
-            this.tagsToDisplay = this.filterTags(queryTerm.toLowerCase());
+            this.tagsToDisplay = this.filterTags(query_term.toLowerCase());
         }
     }
 
-    filterTags(queryTerm) {
-        let itemsToReturn = [];
-        for (let myItem of this._tagRecords) {
-            if (myItem.fields.Name.value.toLowerCase().includes(queryTerm)) {
-                itemsToReturn.push(myItem);
+    filterTags(query_term) {
+        let items_to_return = [];
+        for (let item of this._tagRecords) {
+            if (item.fields.Name.value.toLowerCase().includes(query_term)) {
+                items_to_return.push(item);
             }
         }
-        return itemsToReturn;
+        return items_to_return;
     }
 
     // Probably this method could be inside a Utitlities.js
