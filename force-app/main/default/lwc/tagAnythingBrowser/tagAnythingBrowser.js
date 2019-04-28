@@ -1,9 +1,11 @@
+/* eslint-disable @lwc/lwc/no-async-operation */
 import { LightningElement, track, api, wire } from 'lwc';
 import { getListUi } from 'lightning/uiListApi';
 import TAG_ANYTHING_OBJECT from '@salesforce/schema/Tag_Anything__c';
 
 const PLACEHOLDER_DEFAULT = 'Search Tag by Label';
 const LISTVIEWAPINAME_DEFAULT = 'All';
+const DELAY = 300;
 
 export default class TagAnythingBrowser extends LightningElement {
     @api placeholder = PLACEHOLDER_DEFAULT;
@@ -33,13 +35,16 @@ export default class TagAnythingBrowser extends LightningElement {
     }
 
     handleKeyUp(evt) {
-        let query_term = evt.target.value;
-        if (this.isNullOrWhiteSpace(query_term)) {
-            this.tagsToDisplay = [];
-        }
-        else {
-            this.tagsToDisplay = this.filterTags(query_term.toLowerCase());
-        }
+        window.clearTimeout(this.delayTimeout);
+        const query_term = evt.target.value;
+        this.delayTimeout = setTimeout(() => {
+            if (this.isNullOrWhiteSpace(query_term)) {
+                this.tagsToDisplay = [];
+            }
+            else {
+                this.tagsToDisplay = this.filterTags(query_term.toLowerCase());
+            }
+        }, DELAY);
     }
 
     filterTags(query_term) {
