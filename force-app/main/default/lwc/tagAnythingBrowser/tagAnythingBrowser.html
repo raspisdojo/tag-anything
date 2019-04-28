@@ -12,7 +12,7 @@
     <p>
         <template for:each={tagsToDisplay} for:item="item">
             <div key={item.id}>
-                <c-tag-badge record-id={item.id}></c-tag-badge>
+                <c-tag-badge record-id={item.id} onselected={handleBadgeSelected}></c-tag-badge>
             </div>
         </template>
     </p>

@@ -34,6 +34,10 @@ export default class TagAnythingBrowser extends LightningElement {
         }
     }
 
+    handleBadgeSelected(evt) {
+        this.dispatchEvent(new CustomEvent('badgeselected', { detail: evt.detail }));
+    }
+
     handleKeyUp(evt) {
         window.clearTimeout(this.delayTimeout);
         const query_term = evt.target.value;
