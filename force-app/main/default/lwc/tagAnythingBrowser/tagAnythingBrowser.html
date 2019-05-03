@@ -1,0 +1,24 @@
+<template>
+
+    <lightning-input
+        onkeyup={handleKeyUp}
+        name="enter-search"
+        label="Search Tag"
+        type="search"
+        placeholder={placeholder}
+        variant='label-hidden'>
+    </lightning-input>
+
+    <p>
+        <template for:each={tagsToDisplay} for:item="item">
+            <div key={item.id}>
+                <c-tag-badge record-id={item.id} onselected={handleBadgeSelected}></c-tag-badge>
+            </div>
+        </template>
+    </p>
+
+    <p>
+        {error}
+    </p>
+
+</template>
