@@ -45,7 +45,6 @@ export default class TagAnythingBrowser extends LightningElement {
     }
 
     handleBadgeSelected(evt) {
-        console.log(JSON.stringify(this._tagRecordsMap[evt.detail]));
         this.dispatchEvent(new CustomEvent('badgeselected', { detail: this._tagRecordsMap[evt.detail] }));
     }
 
