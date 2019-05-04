@@ -1,5 +1,6 @@
-import { LightningElement, api } from 'lwc';
+import { LightningElement, api, track } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
+
 import NAME_FIELD from '@salesforce/schema/Tag_Anything__c.Name';
 import IS_ACTIVE_FIELD from '@salesforce/schema/Tag_Anything__c.Is_Active__c';
 import INTERNAL_VALUE_FIELD from '@salesforce/schema/Tag_Anything__c.Internal_Value__c';
@@ -19,6 +20,33 @@ export default class TagForm extends NavigationMixin(LightningElement) {
 
     @api recordId;
 
+    @track tagLabel;
+    @track tagIcon;
+    @track tagIsActive;
+    @track tagLabelColor;
+    @track tagTagColor;
+
+    applyDefaultsToTag() {
+        let input_elements = this.template.querySelectorAll('lightning-input-field');
+        for (let item of input_elements) {
+            if (item.id.includes('tag-name')) {
+                this.tagLabel = item.value;
+            }
+            else if (item.id.includes('tag-is-active')) {
+                this.tagIsActive = item.value;
+            }
+            else if (item.id.includes('tag-icon')) {
+                this.tagIcon = item.value;
+            }
+            else if (item.id.includes('tag-label-color')) {
+                this.tagLabelColor = item.value;
+            }
+            else if (item.id.includes('tag-color')) {
+                this.tagTagColor = item.value;
+            }
+        }
+    }
+
     handleSuccess(event) {
         const payload = event.detail;
         this[NavigationMixin.Navigate]({
@@ -34,5 +62,25 @@ export default class TagForm extends NavigationMixin(LightningElement) {
     handleCancel() {
         window.history.back();
         return false;
+    }
+
+    handleNameChange(evt) {
+        this.tagLabel = evt.detail.value;
+    }
+
+    handleIconChange(evt) {
+        this.tagIcon = evt.detail.value;
+    }
+
+    handleIsActiveChange(evt) {
+        this.tagIsActive = evt.detail.value;
+    }
+
+    handleLabelColorChange(evt) {
+        this.tagLabelColor = evt.detail.value;
+    }
+
+    handleTagColorChange(evt) {
+        this.tagTagColor = evt.detail.value;
     }
 }

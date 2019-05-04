@@ -1,5 +1,6 @@
 import { LightningElement, api, wire } from 'lwc';
 import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
+import { isNullOrWhiteSpace } from 'c/utils';
 
 import NAME_FIELD from '@salesforce/schema/Tag_Anything__c.Name';
 import ICON_FIELD from '@salesforce/schema/Tag_Anything__c.Icon__c';
@@ -11,31 +12,54 @@ const fields = [ NAME_FIELD, ICON_FIELD, IS_ACTIVE_FIELD, LABEL_COLOR_FIELD, TAG
 
 export default class TagBadge extends LightningElement {
     @api recordId;
+    @api disableClick = false;
+    @api inboundLabel = 'No Name';
+    @api inboundIcon = 'utility:refresh';
+    @api inboundIsActive = false;
+    @api inboundLabelColor = '#FFF';
+    @api inboundTagColor = '#EAEAEA';
 
     @wire(getRecord, { recordId: '$recordId', fields })
     wiredRecord;
 
     get label() {
-        return getFieldValue(this.wiredRecord.data, NAME_FIELD);
+        if (!isNullOrWhiteSpace(this.recordId)) {
+            return getFieldValue(this.wiredRecord.data, NAME_FIELD);
+        }
+        return this.inboundLabel;
     }
 
     get icon() {
-        return getFieldValue(this.wiredRecord.data, ICON_FIELD);
+        if (!isNullOrWhiteSpace(this.recordId)) {
+            return getFieldValue(this.wiredRecord.data, ICON_FIELD);
+        }
+        return this.inboundIcon;
     }
 
     get isActive() {
-        return getFieldValue(this.wiredRecord.data, IS_ACTIVE_FIELD);
+        if (!isNullOrWhiteSpace(this.recordId)) {
+            return getFieldValue(this.wiredRecord.data, IS_ACTIVE_FIELD);
+        }
+        return this.inboundIsActive;
     }
 
     get labelColor() {
-        return 'color: ' + getFieldValue(this.wiredRecord.data, LABEL_COLOR_FIELD);
+        if (!isNullOrWhiteSpace(this.recordId)) {
+            return 'color: ' + getFieldValue(this.wiredRecord.data, LABEL_COLOR_FIELD);
+        }
+        return 'color: ' + this.inboundLabelColor;
     }
 
     get tagColor() {
-        return 'background-color: ' + getFieldValue(this.wiredRecord.data, TAG_COLOR_FIELD);
+        if (!isNullOrWhiteSpace(this.recordId)) {
+            return 'background-color: ' + getFieldValue(this.wiredRecord.data, TAG_COLOR_FIELD);
+        }
+        return 'background-color: ' + this.inboundTagColor;
     }
 
     handleBadgeClick() {
-        this.dispatchEvent(new CustomEvent('selected', { detail: this.wiredRecord.data }));
+        if (!this.disableClick) {
+            this.dispatchEvent(new CustomEvent('selected', { detail: this.wiredRecord.data }));
+        }
     }
 }
