@@ -7,8 +7,9 @@ import ICON_FIELD from '@salesforce/schema/Tag_Anything__c.Icon__c';
 import IS_ACTIVE_FIELD from '@salesforce/schema/Tag_Anything__c.Is_Active__c';
 import LABEL_COLOR_FIELD from '@salesforce/schema/Tag_Anything__c.Label_Color__c';
 import TAG_COLOR_FIELD from '@salesforce/schema/Tag_Anything__c.Tag_Color__c';
+import INTERNAL_VALUE from '@salesforce/schema/Tag_Anything__c.Internal_Value__c';
 
-const fields = [ NAME_FIELD, ICON_FIELD, IS_ACTIVE_FIELD, LABEL_COLOR_FIELD, TAG_COLOR_FIELD ];
+const fields = [ NAME_FIELD, ICON_FIELD, IS_ACTIVE_FIELD, LABEL_COLOR_FIELD, TAG_COLOR_FIELD, INTERNAL_VALUE ];
 
 export default class TagBadge extends LightningElement {
     @api recordId;
@@ -18,6 +19,7 @@ export default class TagBadge extends LightningElement {
     @api inboundIsActive = false;
     @api inboundLabelColor = '#FFF';
     @api inboundTagColor = '#EAEAEA';
+    @api inboundInternalValue = '';
 
     @wire(getRecord, { recordId: '$recordId', fields })
     wiredRecord;
@@ -59,7 +61,12 @@ export default class TagBadge extends LightningElement {
 
     handleBadgeClick() {
         if (!this.disableClick) {
-            this.dispatchEvent(new CustomEvent('selected', { detail: this.wiredRecord.data }));
+            if (!isNullOrWhiteSpace(this.recordId)) {
+                this.dispatchEvent(new CustomEvent('selected', { detail: this.wiredRecord.data }));
+            }
+            else {
+                this.dispatchEvent(new CustomEvent('selected', { detail: this.inboundInternalValue }));
+            }
         }
     }
 }

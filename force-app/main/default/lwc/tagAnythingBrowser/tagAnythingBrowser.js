@@ -1,11 +1,14 @@
 /* eslint-disable @lwc/lwc/no-async-operation */
 import { LightningElement, track, api, wire } from 'lwc';
 import { getListUi } from 'lightning/uiListApi';
+import { isNullOrWhiteSpace } from 'c/utils';
 import TAG_ANYTHING_OBJECT from '@salesforce/schema/Tag_Anything__c';
 
 const PLACEHOLDER_DEFAULT = 'Search Tag by Label';
 const LISTVIEWAPINAME_DEFAULT = 'All';
 const DELAY = 300;
+const PAGESIZE = 2000;
+const FIELDS_REQUIRED = [ 'Name', 'Is_Active__c', 'Label_Color__c', 'Tag_Color__c', 'Icon__c', 'Internal_Value__c' ];
 
 export default class TagAnythingBrowser extends LightningElement {
     @api placeholder = PLACEHOLDER_DEFAULT;
@@ -16,8 +19,14 @@ export default class TagAnythingBrowser extends LightningElement {
     @track error;
 
     _tagRecords;
+    _tagRecordsMap = {};
 
-    @wire(getListUi, { objectApiName: TAG_ANYTHING_OBJECT, listViewApiName: '$listView' })
+    @wire(getListUi, {
+        objectApiName: TAG_ANYTHING_OBJECT,
+        listViewApiName: '$listView',
+        pageSize: PAGESIZE,
+        fields: FIELDS_REQUIRED
+    })
     wiredRecord({ error, data }) {
         if (error) {
             this.error = 'Unknown error';
@@ -31,18 +40,19 @@ export default class TagAnythingBrowser extends LightningElement {
         }
         else if (data) {
             this._tagRecords = data.records.records;
+            this.prepareMapOfRecords(this._tagRecords, 'Internal_Value__c');
         }
     }
 
     handleBadgeSelected(evt) {
-        this.dispatchEvent(new CustomEvent('badgeselected', { detail: evt.detail }));
+        this.dispatchEvent(new CustomEvent('badgeselected', { detail: this._tagRecordsMap[evt.detail] }));
     }
 
     handleKeyUp(evt) {
         window.clearTimeout(this.delayTimeout);
         const query_term = evt.target.value;
         this.delayTimeout = setTimeout(() => {
-            if (this.isNullOrWhiteSpace(query_term)) {
+            if (isNullOrWhiteSpace(query_term)) {
                 this.tagsToDisplay = [];
             }
             else {
@@ -61,8 +71,9 @@ export default class TagAnythingBrowser extends LightningElement {
         return items_to_return;
     }
 
-    // Probably this method could be inside a Utitlities.js
-    isNullOrWhiteSpace(string_value) {
-        return !string_value || string_value.length === 0 || /^\s*$/.test(string_value);
+    prepareMapOfRecords(records, key_field) {
+        for (let item of records) {
+            this._tagRecordsMap[item.fields[key_field].value] = item;
+        }
     }
 }
