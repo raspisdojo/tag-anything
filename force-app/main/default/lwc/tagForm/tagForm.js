@@ -83,4 +83,17 @@ export default class TagForm extends NavigationMixin(LightningElement) {
     handleTagColorChange(evt) {
         this.tagTagColor = evt.detail.value;
     }
+
+    handleInputLabelColorChange(evt) {
+        this.tagLabelColor = evt.detail.value;
+    }
+
+    handleInputTagColorChange(evt) {
+        this.tagTagColor = evt.detail.value;
+    }
+
+    submitMyForm() {
+        let my_form = this.template.querySelector('[data-id="my-form"]');
+        my_form.submit();
+    }
 }
