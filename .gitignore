@@ -12,3 +12,6 @@ node_modules
 *.profile-meta.xml
 # Ignore Org Preferences Settings
 OrgPreference.settings-meta.xml
+.eslintrc.json
+jsconfig.json
+force-app/main/default/lwc/jsconfig.json

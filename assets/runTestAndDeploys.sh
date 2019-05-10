@@ -22,5 +22,5 @@ if [ "$OPERATION" = "Deploy" ]; then
     rc=$?; if [[ $rc != 0 ]]; then exit $rc; fi
     echo "Running Deployment against" $ENVIRONMENT
     sfdx force:mdapi:deploy -l RunLocalTests -d temp_metadata/ -u DevHub -w 10
-    rc=$?; if [[ $rc != 0 ]]; then exit $rc; fi    
+    rc=$?; if [[ $rc != 0 ]]; then exit $rc; fi
 fi
