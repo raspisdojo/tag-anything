@@ -1,6 +1,6 @@
 # DEFAULT VALUES:
 echo "Getting default config"
-source ./defaults.config
+source defaults.config
 
 while getopts e:c:u:r:f:l:b:f: option
 do
