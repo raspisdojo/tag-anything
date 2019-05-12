@@ -1,6 +1,8 @@
 # DEFAULT VALUES:
+parent_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
+cd "$parent_path"
 echo "Getting default config"
-source defaults.config
+source ./defaults.config
 
 while getopts e:c:u:r:f:l:b:f: option
 do
