@@ -7,9 +7,8 @@
     </targets>
     <targetConfigs>
         <targetConfig targets="lightning__RecordPage">
-            <property name="recordApiName" type="String" default="Record API Name" label="Record API Name"/>
-            <property name="fieldApiName" type="String" default="Field API Name" label="Field API Name"/>
-            <property name="SObjectAndFieldApiNames" type="String" default="Field API Name" label="Field API Name"/>
+            <property name="recordApiName" type="String" label="Record API Name"/>
+            <property name="fieldApiName" type="String" label="Field API Name"/>
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>

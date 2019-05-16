@@ -1,17 +1,24 @@
 <template>
     <lightning-card title="Tags" icon-name="standard:quotes">
         <div class="slds-m-around_medium">
-            <!-- {recordId} -->
-            {recordFieldValue} - {recordApiName} - {fieldApiName} <br>
-            {fieldName}
-            <!-- <lightning-badge label="Alpha"></lightning-badge> -->
-        </div>
-
-        <!--<template for:each={arrayOfIds} for:item="item">
-            <div key={item.id}>
-                <c-tag-badge record-id={item.id}></c-tag-badge>
+                <!-- {recordId} -->
+                <!-- {recordFieldValue} - {recordApiName} - {fieldApiName} -->
+            <div class="c-container">
+            <!-- TO-DO: Fix the wrap items -->
+                <lightning-layout horizontal-align="center" style="flex-wrap: wrap;">
+                    <template for:each={tags_list_view} for:item="item" for:index="index">
+                        <lightning-layout-item key={item.fields.Id.value} padding={addPadding} flexibility="auto" class="slds-m-bottom_small">
+                            <c-tag-badge key={item.fields.Id.value}
+                                        inbound-is-active={item.fields.Is_Active__c.value} 
+                                        inbound-label={item.fields.Name.value}
+                                        inbound-icon={item.fields.Icon__c.value}
+                                        inbound-label-color={item.fields.Label_Color__c.value} 
+                                        inbound-tag-color={item.fields.Tag_Color__c.value} 
+                                        inbound-internal-value={item.fields.Internal_Value__c.value}></c-tag-badge>
+                        </lightning-layout-item>
+                    </template>
+                </lightning-layout>
             </div>
-        </template>-->
-
+        </div>
     </lightning-card>
 </template>
