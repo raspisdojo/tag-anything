@@ -1,11 +1,8 @@
 <template>
     <lightning-card title="Tags" icon-name="standard:quotes">
         <div class="slds-m-around_medium">
-                <!-- {recordId} -->
-                <!-- {recordFieldValue} - {recordApiName} - {fieldApiName} -->
             <div class="c-container">
-            <!-- TO-DO: Fix the wrap items -->
-                <lightning-layout horizontal-align="center" style="flex-wrap: wrap;">
+                <lightning-layout horizontal-align="center" multiple-rows="true">
                     <template for:each={tags_list_view} for:item="item" for:index="index">
                         <lightning-layout-item key={item.fields.Id.value} padding={addPadding} flexibility="auto" class="slds-m-bottom_small">
                             <c-tag-badge key={item.fields.Id.value}
