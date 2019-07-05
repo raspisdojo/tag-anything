@@ -50,13 +50,13 @@ export default class TagAnythingBrowser extends LightningElement {
         }
     }
 
-    handleBadgeSelected(evt) {
-        this.dispatchEvent(new CustomEvent("badgeselected", { detail: this._tagRecordsMap[evt.detail] }));
+    handleBadgeSelected(event) {
+        this.dispatchEvent(new CustomEvent("badgeselected", { detail: this._tagRecordsMap[event.detail] }));
     }
 
-    handleKeyUp(evt) {
+    handleOnChange(event) {
         window.clearTimeout(this.delayTimeout);
-        const query_term = evt.target.value;
+        const query_term = event.target.value;
         this.delayTimeout = setTimeout(() => {
             if (isNullOrWhiteSpace(query_term)) {
                 this.tagsToDisplay = [];
