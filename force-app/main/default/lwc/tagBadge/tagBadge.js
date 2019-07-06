@@ -20,6 +20,7 @@ export default class TagBadge extends LightningElement {
     @api inboundLabelColor = '#FFF';
     @api inboundTagColor = '#EAEAEA';
     @api inboundInternalValue = '';
+    @api displayDelete = false;
 
     @wire(getRecord, { recordId: '$recordId', fields })
     wiredRecord;
@@ -68,5 +69,9 @@ export default class TagBadge extends LightningElement {
                 this.dispatchEvent(new CustomEvent('selected', { detail: this.inboundInternalValue }));
             }
         }
+    }
+
+    deleteHandler(){
+        this.dispatchEvent(new CustomEvent('delete', { detail: this.inboundInternalValue }));
     }
 }
