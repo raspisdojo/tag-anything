@@ -4,6 +4,7 @@ import { getListUi } from "lightning/uiListApi";
 import { updateRecord } from "lightning/uiRecordApi";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import { refreshApex } from "@salesforce/apex";
+import { isNullOrWhiteSpace } from "c/utils";
 import TAG_OBJECT from "@salesforce/schema/Tag_Anything__c";
 
 export default class TagAnythingDisplayer extends LightningElement {
@@ -83,12 +84,13 @@ export default class TagAnythingDisplayer extends LightningElement {
     }
 
     selectedHandler(e) {
-        let index = this.record_tags.findIndex(
+        let index = this.record_tags != null && this.record_tags.length > 0 ? 
+        this.record_tags.findIndex(
             (element) => element.fields.Internal_Value__c.value === e.detail.fields.Internal_Value__c.value
-        );
+        ) : -1;
         if (index === -1) {
             this.record_tags.push(e.detail);
-            let tags = this.field_value.split(";");
+            let tags = !isNullOrWhiteSpace(this.field_value) ? this.field_value.split(";") : [];
             tags.push(e.detail.fields.Internal_Value__c.value);
             this.field_value = tags.join(";");
         }
