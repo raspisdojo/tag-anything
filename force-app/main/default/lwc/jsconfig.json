@@ -1,0 +1,32 @@
+{
+    "compilerOptions": {
+        "experimentalDecorators": true,
+        "baseUrl": ".",
+        "paths": {
+            "c/tagAnythingBrowser": [
+                "tagAnythingBrowser/tagAnythingBrowser.js"
+            ],
+            "c/tagAnythingDisplayer": [
+                "tagAnythingDisplayer/tagAnythingDisplayer.js"
+            ],
+            "c/tagBadge": [
+                "tagBadge/tagBadge.js"
+            ],
+            "c/tagForm": [
+                "tagForm/tagForm.js"
+            ],
+            "c/utils": [
+                "utils/utils.js"
+            ]
+        }
+    },
+    "include": [
+        "**/*",
+        "../../../../.sfdx/typings/lwc/**/*.d.ts"
+    ],
+    "typeAcquisition": {
+        "include": [
+            "jest"
+        ]
+    }
+}

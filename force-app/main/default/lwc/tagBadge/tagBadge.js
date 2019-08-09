@@ -25,10 +25,11 @@ export default class TagBadge extends LightningElement {
     @api disableClick = false;
     @api inboundLabel = "No Name";
     @api inboundIcon = "utility:refresh";
-    @api inboundIsActive = false;
     @api inboundLabelColor = "#FFF";
     @api inboundTagColor = "#EAEAEA";
     @api inboundInternalValue = "";
+    @api inboundIsActive = false;
+    @api displayDelete = false;
     @api inboundVariant = null;
 
     @wire(getRecord, { recordId: "$recordId", fields })
@@ -84,5 +85,9 @@ export default class TagBadge extends LightningElement {
                 this.dispatchEvent(new CustomEvent("selected", { detail: this.inboundInternalValue }));
             }
         }
+    }
+
+    deleteHandler() {
+        this.dispatchEvent(new CustomEvent("delete", { detail: this.inboundInternalValue }));
     }
 }
