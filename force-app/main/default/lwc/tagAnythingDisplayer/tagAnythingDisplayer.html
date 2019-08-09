@@ -6,7 +6,7 @@
         <div class="slds-m-around_medium">
             <div class="c-container">
                 <lightning-layout horizontal-align="center" multiple-rows="true">
-                    <template for:each={tags_list_view} for:item="item" for:index="index">
+                    <template for:each={record_tags} for:item="item" for:index="index">
                         <lightning-layout-item key={item.fields.Id.value} padding={addPadding} flexibility="auto" class="slds-m-bottom_small">
                             <c-tag-badge key={item.fields.Id.value}
                                         display-delete={editMode}
@@ -20,7 +20,7 @@
                         </lightning-layout-item>
                     </template>
                     <lightning-layout-item if:true={editMode} flexibility="auto" class="slds-m-top_small" size="12">
-                        <c-tag-anything-browser></c-tag-anything-browser>
+                        <c-tag-anything-browser onbadgeselected={selectedHandler}></c-tag-anything-browser>
                     </lightning-layout-item>
                     <lightning-layout-item flexibility="auto" class="slds-m-top_small" size="12">
                         <lightning-layout horizontal-align="center" multiple-rows="true">

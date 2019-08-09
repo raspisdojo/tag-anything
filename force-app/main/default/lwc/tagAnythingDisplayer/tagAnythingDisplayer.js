@@ -12,13 +12,14 @@ export default class TagAnythingDisplayer extends LightningElement {
     @api fieldApiName;
     @api editMode = false;
     @track tags_list_view;
+    @track record_tags;
     @track field_value;
     @track error;
 
     _myValues = [];
     _idField = "";
     _recordField = "";
-    _tags_list_view_aux = [];
+    _record_tags_aux = [];
     _field_value_aux = "";
     _count = 0;
 
@@ -33,13 +34,14 @@ export default class TagAnythingDisplayer extends LightningElement {
     record;
 
     @wire(getListUi, { objectApiName: TAG_OBJECT, listViewApiName: 'All' })
-    wired_tags_list_view({ error, data }) {
+    wired_record_tags({ error, data }) {
         if (data) {
-            this.tags_list_view = this.getRecordTags(data.records.records, getFieldValue(this.record.data, this.recordApiName + '.' + this.fieldApiName));
+            this.tags_list_view = data.records.records;
+            this.record_tags = this.getRecordTags(data.records.records, getFieldValue(this.record.data, this.recordApiName + '.' + this.fieldApiName));
             this.error = undefined;
         } else if (error) {
             this.error = error;
-            this.tags_list_view = undefined;
+            this.record_tags = undefined;
         }
     }
     
@@ -66,35 +68,42 @@ export default class TagAnythingDisplayer extends LightningElement {
     changeEditMode() {
         this.editMode = !this.editMode;
         if(this.editMode){
-            this._tags_list_view_aux = [];
-            for(var t of this.tags_list_view){
-                this._tags_list_view_aux.push(t);
+            this._record_tags_aux = [];
+            for(var t of this.record_tags){
+                this._record_tags_aux.push(t);
             }
             this._field_value_aux = this.field_value;
         } else {
-            this.tags_list_view = this._tags_list_view_aux;
+            this.record_tags = this._record_tags_aux;
             this.field_value = this._field_value_aux;
             this._field_value_aux = "";
         }
     }
 
-    deleteHandler(e) {
-        console.log(e.detail);
-        console.log(this.tags_list_view.length);
-        console.log(this.field_value);
-        //const internalValue = e.detail;
-        let tags = this.field_value.split(";");
-        let index = this.tags_list_view.findIndex(element => element.fields.Internal_Value__c.value === e.detail);
-        console.log(this.field_value);
+    selectedHandler(e) {
+        console.log("selectedHandler " + e.detail.fields.Internal_Value__c.value);
+        let index = this.record_tags.findIndex(element => element.fields.Internal_Value__c.value === e.detail.fields.Internal_Value__c.value);
         console.log(index);
-        this.tags_list_view.splice(index, 1);
+        //let tag = this.tags_list_view.find(element => element.fields.Internal_Value__c.value === e.detail);
+        //console.log(tag);
+        if(index == -1){
+            this.record_tags.push(e.detail);
+            let tags = this.field_value.split(";");
+            tags.push(e.detail.fields.Internal_Value__c.value);
+            this.field_value = tags.join(';');
+        }
+    }
+
+    deleteHandler(e) {
+        let tags = this.field_value.split(";");
+        let index = this.record_tags.findIndex(element => element.fields.Internal_Value__c.value === e.detail);
+        this.record_tags.splice(index, 1);
         tags.splice(tags.indexOf(e.detail), 1);
         this.field_value = tags.join(';');
-        console.log(this.tags_list_view.length);
     }
 
     handleSave() {
-        this._tags_list_view_aux = this.tags_list_view;
+        this._record_tags_aux = this.record_tags;
         this._field_value_aux = this.field_value;
         // Create the recordInput object
         const fields = {};
