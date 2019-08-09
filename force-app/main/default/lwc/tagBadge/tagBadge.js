@@ -87,7 +87,7 @@ export default class TagBadge extends LightningElement {
         }
     }
 
-    deleteHandler(){
-        this.dispatchEvent(new CustomEvent('delete', { detail: this.inboundInternalValue }));
+    deleteHandler() {
+        this.dispatchEvent(new CustomEvent("delete", { detail: this.inboundInternalValue }));
     }
 }
