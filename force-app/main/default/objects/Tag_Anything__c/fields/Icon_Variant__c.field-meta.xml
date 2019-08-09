@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Icon_Variant__c</fullName>
+    <externalId>false</externalId>
+    <label>Icon Variant</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>inverse</fullName>
+                <default>false</default>
+                <label>inverse</label>
+            </value>
+            <value>
+                <fullName>success</fullName>
+                <default>false</default>
+                <label>success</label>
+            </value>
+            <value>
+                <fullName>warning</fullName>
+                <default>false</default>
+                <label>warning</label>
+            </value>
+            <value>
+                <fullName>error</fullName>
+                <default>false</default>
+                <label>error</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

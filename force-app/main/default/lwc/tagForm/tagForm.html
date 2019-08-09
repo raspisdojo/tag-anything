@@ -1,47 +1,113 @@
 <template>
-    <lightning-record-edit-form
-        record-id={recordId}
-        object-api-name={objectApiName}
-        onsuccess={handleSuccess}
-        onload={applyDefaultsToTag} >
-        <lightning-card icon-name="custom:custom7">
-            <div slot="title">
-                Tag Preview: 
-                <c-tag-badge 
-                    disable-click="true"
-                    inbound-label={tagLabel}
-                    inbound-icon={tagIcon}
-                    inbound-is-active={tagIsActive}
-                    inbound-label-color={tagLabelColor}
-                    inbound-tag-color={tagTagColor} >
-                </c-tag-badge>
-            </div>
-            <lightning-messages></lightning-messages>
-            <lightning-layout multiple-rows="true" horizontal-align="center" vertical-align="start" >
-                <lightning-layout-item size="6" padding="around-small" >
-                    <lightning-input-field id='tag-name' onchange={handleNameChange} field-name={nameField}></lightning-input-field>
+    <lightning-card icon-name="custom:custom7">
+        <div slot="title">
+            Tag Preview:
+            <c-tag-badge
+                disable-click="true"
+                inbound-label={tagLabel}
+                inbound-icon={tagIcon}
+                inbound-is-active={tagIsActive}
+                inbound-label-color={tagLabelColor}
+                inbound-tag-color={tagTagColor}
+                inbound-variant={tagIconVariant}
+            >
+            </c-tag-badge>
+        </div>
+        <div slot="footer">
+            <lightning-button
+                label="Cancel"
+                onclick={handleCancel}
+                class="slds-p-horizontal_xx-small"
+            ></lightning-button>
+            <lightning-button
+                label="Submit"
+                onclick={submitMyForm}
+                variant="brand"
+                class="slds-p-horizontal_xx-small"
+            ></lightning-button>
+        </div>
+
+        <lightning-messages></lightning-messages>
+
+        <lightning-record-edit-form
+            data-id="my-form"
+            record-id={recordId}
+            object-api-name={objectApiName}
+            onsubmit={handleSubmit}
+            onsuccess={handleSuccess}
+            onload={applyDefaultsToTag}
+        >
+            <lightning-layout multiple-rows="true" horizontal-align="start" vertical-align="start">
+                <lightning-layout-item size="6" padding="around-small">
+                    <lightning-input-field
+                        id="tag-name"
+                        name="TEST"
+                        onchange={handleNameChange}
+                        field-name={nameField}
+                    ></lightning-input-field>
                 </lightning-layout-item>
-                <lightning-layout-item size="6" padding="around-small" >
-                    <lightning-input-field id='tag-is-active' onchange={handleIsActiveChange} field-name={isActiveField}></lightning-input-field>
+                <lightning-layout-item size="6" padding="around-small">
+                    <lightning-input-field
+                        id="tag-is-active"
+                        onchange={handleIsActiveChange}
+                        field-name={isActiveField}
+                    ></lightning-input-field>
                 </lightning-layout-item>
-                <lightning-layout-item size="6" padding="around-small" >
+                <lightning-layout-item size="6" padding="around-small">
                     <lightning-input-field field-name={internalValueField}></lightning-input-field>
                 </lightning-layout-item>
-                <lightning-layout-item size="6" padding="around-small" >
-                    <lightning-input-field id='tag-icon' onchange={handleIconChange} field-name={iconField}></lightning-input-field>
+                <lightning-layout-item size="6" padding="around-small">
+                    <lightning-input-field
+                        id="tag-icon"
+                        onchange={handleIconChange}
+                        field-name={iconField}
+                    ></lightning-input-field>
                 </lightning-layout-item>
-                <lightning-layout-item size="6" padding="around-small" >
-                    <lightning-input-field id='tag-label-color' onchange={handleLabelColorChange} field-name={labelColorField}></lightning-input-field>
+                <lightning-layout-item size="6" padding="around-small">
+                    <lightning-input-field
+                        id="variant"
+                        onchange={handleInputTagIconVariant}
+                        field-name={iconVariantField}
+                    ></lightning-input-field>
                 </lightning-layout-item>
-                <lightning-layout-item size="6" padding="around-small" >
-                    <lightning-input-field id='tag-color' onchange={handleTagColorChange} field-name={tagColorField}></lightning-input-field>
+                <lightning-layout-item class="slds-hide" size="6" padding="around-small">
+                    <lightning-input-field
+                        id="tag-label-color"
+                        onchange={handleLabelColorChange}
+                        field-name={labelColorField}
+                        value={tagLabelColor}
+                    ></lightning-input-field>
+                </lightning-layout-item>
+                <lightning-layout-item class="slds-hide" size="6" padding="around-small">
+                    <lightning-input-field
+                        id="tag-color"
+                        onchange={handleTagColorChange}
+                        field-name={tagColorField}
+                        value={tagTagColor}
+                    ></lightning-input-field>
                 </lightning-layout-item>
             </lightning-layout>
-            <div slot="footer">
-                <lightning-button label="Cancel" onclick={handleCancel} class="slds-p-horizontal_xx-small"></lightning-button>
-                <lightning-button type="submit" label="Submit" variant="brand" class="slds-p-horizontal_xx-small"></lightning-button>
-            </div>
-            
-        </lightning-card>
-    </lightning-record-edit-form>
+        </lightning-record-edit-form>
+
+        <lightning-layout multiple-rows="true" horizontal-align="center" vertical-align="start">
+            <lightning-layout-item size="6" padding="around-small">
+                <lightning-input
+                    type="color"
+                    onchange={handleInputLabelColorChange}
+                    name="input-label-color"
+                    label="Label color"
+                    value={tagLabelColor}
+                ></lightning-input>
+            </lightning-layout-item>
+            <lightning-layout-item size="6" padding="around-small">
+                <lightning-input
+                    type="color"
+                    onchange={handleInputTagColorChange}
+                    name="input-tag-color"
+                    label="Tag color"
+                    value={tagTagColor}
+                ></lightning-input>
+            </lightning-layout-item>
+        </lightning-layout>
+    </lightning-card>
 </template>

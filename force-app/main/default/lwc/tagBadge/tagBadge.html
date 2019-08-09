@@ -1,8 +1,14 @@
 <template>
     <span style={tagColor} class="slds-badge" onclick={handleBadgeClick}>
         <span class="slds-badge__icon slds-badge__icon_left">
-            <span class="slds-icon_container cIcon">
-                <lightning-icon alternative-text={icon} icon-name={icon} size="xx-small" title={label}></lightning-icon>
+            <span class="slds-icon_container">
+                <lightning-icon
+                    alternative-text={icon}
+                    icon-name={icon}
+                    size="xx-small"
+                    title={label}
+                    variant={iconVariant}
+                ></lightning-icon>
             </span>
         </span>
         <span style={labelColor}>{label}</span>
