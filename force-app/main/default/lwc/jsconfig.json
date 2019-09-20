@@ -17,6 +17,9 @@
             ],
             "c/utils": [
                 "utils/utils.js"
+            ],
+            "c/tagAnythingNewTag": [
+                "tagAnythingNewTag/tagAnythingNewTag.js"
             ]
         }
     },
