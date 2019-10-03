@@ -31,8 +31,7 @@ jobs:
         - stage: test
           if: NOT (branch IN (master, QA))
           script:
-              - ls ~/
-              - ls -d ./
+              - ls -d $PWD/
               - docker run -v /:/project -w project raspikabek/booker-cli:alpha cd project && booker deploy -i $TEST_CONSUMERKEY -u $TEST_USER -c -k ./project/assets/server.key
               #- bash assets/runTestAndDeploys.sh -e $TEST_CONSUMERKEY -u $TEST_USER -c 1
         - stage: Test PR in QA
