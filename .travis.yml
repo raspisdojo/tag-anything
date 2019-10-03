@@ -32,7 +32,7 @@ jobs:
           if: NOT (branch IN (master, QA))
           script:
               - ls -d $PWD/
-              - docker run -v /:/project -w project raspikabek/booker-cli:alpha cd project && booker deploy -i $TEST_CONSUMERKEY -u $TEST_USER -c -k ./project/assets/server.key
+              - docker run -v /home/travis/build/raspi-s-dojo/tag-anything/:/project -w /project raspikabek/booker-cli:alpha booker deploy -i $TEST_CONSUMERKEY -u $TEST_USER -c -k ./assets/server.key
               #- bash assets/runTestAndDeploys.sh -e $TEST_CONSUMERKEY -u $TEST_USER -c 1
         - stage: Test PR in QA
           if: "(branch = QA) AND (type = pull_request)"
