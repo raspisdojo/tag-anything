@@ -31,6 +31,7 @@ jobs:
         - stage: test
           if: NOT (branch IN (master, QA))
           script:
+              - docker run raspikabek/booker-cli:alpha ls
               - docker create --name booker-tmp raspikabek/booker-cli:alpha
               - docker cp ./assets/server.key booker-tmp:/server.key
               - docker commit booker-tmp booker-image
