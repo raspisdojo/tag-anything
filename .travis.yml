@@ -31,11 +31,7 @@ jobs:
         - stage: test
           if: NOT (branch IN (master, QA))
           script:
-              - docker run raspikabek/booker-cli:alpha ls
-              - docker create --name booker-tmp raspikabek/booker-cli:alpha
-              - docker cp ./assets/server.key booker-tmp:/server.key
-              - docker commit booker-tmp booker-image
-              - docker run -i booker-image booker deploy -i $TEST_CONSUMERKEY -u $TEST_USER -c -k ./server.key
+              - docker run -v ./:/ raspikabek/booker-cli:alpha booker deploy -i $TEST_CONSUMERKEY -u $TEST_USER -c -k ./assets/server.key
               #- bash assets/runTestAndDeploys.sh -e $TEST_CONSUMERKEY -u $TEST_USER -c 1
         - stage: Test PR in QA
           if: "(branch = QA) AND (type = pull_request)"
