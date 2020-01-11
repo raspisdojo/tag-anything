@@ -21,6 +21,7 @@ export default class TagForm extends NavigationMixin(LightningElement) {
     objectApiName = "Tag_Anything__c";
 
     @api recordId;
+    @api modalMode = false;
 
     @track tagLabel;
     @track tagIcon;
@@ -50,18 +51,25 @@ export default class TagForm extends NavigationMixin(LightningElement) {
 
     handleSuccess(event) {
         const payload = event.detail;
-        this[NavigationMixin.Navigate]({
-            type: "standard__recordPage",
-            attributes: {
-                recordId: payload.id,
-                objectApiName: payload.apiName,
-                actionName: "view"
-            }
-        });
+        if(!this.modalMode){
+            this[NavigationMixin.Navigate]({
+                type: "standard__recordPage",
+                attributes: {
+                    recordId: payload.id,
+                    objectApiName: payload.apiName,
+                    actionName: "view"
+                }
+            });
+        } else {
+            this.dispatchEvent(new CustomEvent("success", { detail: payload }));
+        }
     }
 
     handleCancel() {
-        window.history.back();
+        if(!this.modalMode)
+            window.history.back();
+        else 
+            this.dispatchEvent(new CustomEvent("cancel"));
         return false;
     }
 

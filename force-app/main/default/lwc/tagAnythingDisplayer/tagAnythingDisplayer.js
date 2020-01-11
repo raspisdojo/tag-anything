@@ -84,6 +84,7 @@ export default class TagAnythingDisplayer extends LightningElement {
     }
 
     selectedHandler(e) {
+        console.log("select");
         let index = this.record_tags != null && this.record_tags.length > 0 ? 
         this.record_tags.findIndex(
             (element) => element.fields.Internal_Value__c.value === e.detail.fields.Internal_Value__c.value

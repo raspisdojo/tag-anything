@@ -9,6 +9,9 @@
             "c/tagAnythingDisplayer": [
                 "tagAnythingDisplayer/tagAnythingDisplayer.js"
             ],
+            "c/tagAnythingNewTag": [
+                "tagAnythingNewTag/tagAnythingNewTag.js"
+            ],
             "c/tagBadge": [
                 "tagBadge/tagBadge.js"
             ],
@@ -17,9 +20,6 @@
             ],
             "c/utils": [
                 "utils/utils.js"
-            ],
-            "c/tagAnythingNewTag": [
-                "tagAnythingNewTag/tagAnythingNewTag.js"
             ]
         }
     },

@@ -1,5 +1,5 @@
 <template>
-    <div onclick={navigateToNewRecordPage} class="createNew itemContainer slds-lookup__item-action--label slds-text-link--reset slds-grid slds-grid--vertical-align-center slds-truncate forceSearchInputLookupDesktopActionItem lookup__footer" role="option">
+    <div onclick={openModal} class="createNew itemContainer slds-lookup__item-action--label slds-text-link--reset slds-grid slds-grid--vertical-align-center slds-truncate forceSearchInputLookupDesktopActionItem lookup__footer" role="option">
         <lightning-icon
             alternative-text="Add"
             icon-name="utility:add"
@@ -8,4 +8,32 @@
             class="itemIcon slds-icon_container slds-button__icon"
         ></lightning-icon>
         <span class="itemLabel slds-truncate slds-show--inline-block slds-m-left--xx-small" title="New Tag">New Tag</span></div>
+        <template if:true={open_modal}>
+            <div class="demo-only" style="height: 640px;">
+                <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                        <header class="slds-modal__header">
+                            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                                <lightning-icon icon-name="utility:close" size="medium">
+                                </lightning-icon>
+                                <span class="slds-assistive-text">Close</span>
+                            </button>
+                            <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">New Tag</h2>
+                        </header>
+                        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                            <c-tag-form
+                                onsuccess={addTag}
+                                oncancel={closeModal}
+                                modal-mode="true"
+                            ></c-tag-form>
+                        </div>
+                        <!--<footer class="slds-modal__footer">
+                            <lightning-button label="Cancel" variant="neutral" onclick={closeModal}></lightning-button>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <lightning-button label="Save" variant="brand" onclick={saveMethod}></lightning-button>
+                        </footer>-->
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+            </div>
+        </template>
 </template>
