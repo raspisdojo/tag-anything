@@ -1,0 +1,23 @@
+{
+  "name": "tag-anything",
+  "version": "1.0.0",
+  "description": "Salesforce Tag Anything feature #LightningComponent #Salesforce #Awesome",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raspi-s-dojo/tag-anything.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/raspi-s-dojo/tag-anything/issues"
+  },
+  "homepage": "https://github.com/raspi-s-dojo/tag-anything#readme",
+  "devDependencies": {
+    "prettier": "1.19.1",
+    "prettier-plugin-apex": "1.1.0"
+  }
+}
