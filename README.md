@@ -40,4 +40,5 @@ Project under construction
 ### Recommendations
 
 -   In order to format the document when we save it, we recommend to set in your settings.json with the following entries: - `editor.formatOnSave` as `true` - `editor.formatOnSaveTimout` as `5000`
-    _(you can open your settings pressing `Ctrl+Shift+P` and select the option `Preferences: Open Settings (JSON)` )_# HOW TO INSTALL AND USER PRETTIER WITH APEX
+
+    _(you can open your settings pressing `Ctrl+Shift+P` and select the option `Preferences: Open Settings (JSON)` )_
