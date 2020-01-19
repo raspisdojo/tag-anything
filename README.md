@@ -4,6 +4,10 @@ Salesforce Tag Anything feature #LightningComponent #Salesforce #Awesome
 
 Project under construction
 
+# HOW TO USE CUSTOM RULESET
+
+In your VSCode Settings, add the following entry: `"apexPMD.rulesets": ["pmdrules.xml"]`
+
 # HOW TO SETUP AND USE PRETTIER
 
 ### Requirements
