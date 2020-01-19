@@ -4,9 +4,28 @@ Salesforce Tag Anything feature #LightningComponent #Salesforce #Awesome
 
 Project under construction
 
-# HOW TO USE CUSTOM RULESET
+# HOW TO USE APEX PMD CUSTOM RULESET
 
-In your VSCode Settings, add the following entry: `"apexPMD.rulesets": ["pmdrules.xml"]`
+### Requirements
+
+-   VSCode
+-   Apex PMD VSCode plugin
+
+    ```
+    Name: Apex PMD
+    Id: chuckjonas.apex-pmd
+    Description: PMD static analysis for Salesforce Apex
+    Version: 0.4.6
+    Publisher: Charlie Jonas
+    VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=chuckjonas.apex-pmd
+    ```
+
+### Steps to use:
+
+-   Apex PMD plugin will follow a default ruleset, but in order to use a custom ruleset you need:
+    -   A custom ruleset XML file with the rules, like in this example you can see a file called `pmdrules.xml`
+    -   In your VSCode Settings, add the following entry: `"apexPMD.rulesets": ["pmdrules.xml"]`
+    -   Optional: If you want to apply the default internal rules add `default` in the array of rulesets.
 
 # HOW TO SETUP AND USE PRETTIER
 
