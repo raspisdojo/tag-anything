@@ -1,0 +1,64 @@
+<template>
+    <lightning-card title="Tags" icon-name="standard:quotes">
+        <div slot="actions">
+            <lightning-button-icon
+                if:false={editMode}
+                icon-name="utility:edit"
+                variant="border-filled"
+                size="small"
+                alternative-text="Edit"
+                onclick={changeEditMode}
+            ></lightning-button-icon>
+        </div>
+        <div class="slds-m-around_medium">
+            <div class="c-container">
+                <lightning-layout horizontal-align="center" multiple-rows="true">
+                    <template for:each={record_tags} for:item="item" for:index="index">
+                        <lightning-layout-item
+                            key={item.fields.Id.value}
+                            padding={addPadding}
+                            flexibility="auto"
+                            class="slds-m-bottom_small"
+                        >
+                            <c-tag-badge
+                                key={item.fields.Id.value}
+                                display-delete={editMode}
+                                inbound-is-active={item.fields.Is_Active__c.value}
+                                inbound-label={item.fields.Name.value}
+                                inbound-icon={item.fields.Icon__c.value}
+                                inbound-label-color={item.fields.Label_Color__c.value}
+                                inbound-tag-color={item.fields.Tag_Color__c.value}
+                                inbound-internal-value={item.fields.Internal_Value__c.value}
+                                ondelete={deleteHandler}
+                            ></c-tag-badge>
+                        </lightning-layout-item>
+                    </template>
+                    <lightning-layout-item if:true={editMode} flexibility="auto" class="slds-m-top_small" size="12">
+                        <c-tag-anything-browser onbadgeselected={selectedHandler}></c-tag-anything-browser>
+                    </lightning-layout-item>
+                    <lightning-layout-item flexibility="auto" class="slds-m-top_small" size="12">
+                        <lightning-layout horizontal-align="center" multiple-rows="true">
+                            <lightning-layout-item flexibility="auto">
+                                <lightning-button
+                                    if:true={editMode}
+                                    label="Cancel"
+                                    class="slds-p-horizontal_xx-small"
+                                    onclick={changeEditMode}
+                                ></lightning-button>
+                            </lightning-layout-item>
+                            <lightning-layout-item flexibility="auto">
+                                <lightning-button
+                                    if:true={editMode}
+                                    label="Save"
+                                    variant="brand"
+                                    class="slds-p-horizontal_xx-small"
+                                    onclick={handleSave}
+                                ></lightning-button>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </div>
+        </div>
+    </lightning-card>
+</template>

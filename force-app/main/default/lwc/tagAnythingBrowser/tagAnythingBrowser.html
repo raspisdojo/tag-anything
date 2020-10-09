@@ -1,25 +1,27 @@
 <template>
-
     <lightning-input
-        onkeyup={handleKeyUp}
+        onchange={handleOnChange}
         name="enter-search"
         label="Search Tag"
         type="search"
         placeholder={placeholder}
-        variant='label-hidden'>
+        variant="label-hidden"
+    >
     </lightning-input>
 
     <p>
         <template for:each={tagsToDisplay} for:item="item">
             <div key={item.id}>
-                    <c-tag-badge 
+                <c-tag-badge
                     onselected={handleBadgeSelected}
                     inbound-label={item.fields.Name.value}
                     inbound-icon={item.fields.Icon__c.value}
                     inbound-is-active={item.fields.Is_Active__c.value}
                     inbound-label-color={item.fields.Label_Color__c.value}
                     inbound-tag-color={item.fields.Tag_Color__c.value}
-                    inbound-internal-value={item.fields.Internal_Value__c.value} >
+                    inbound-internal-value={item.fields.Internal_Value__c.value}
+                    inbound-variant={item.fields.Icon_Variant__c.value}
+                >
                 </c-tag-badge>
             </div>
         </template>
@@ -28,5 +30,4 @@
     <p>
         {error}
     </p>
-
 </template>
